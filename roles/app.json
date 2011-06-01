@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Install packages for rails app",
+  "run_list": [
+	"recipe[bundler]",
+    "recipe[ruby]",
+    "recipe[gems]",
+    "recipe[rails]",
+	"recipe[nginx]"
+  ]
+}
