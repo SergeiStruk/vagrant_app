@@ -1,15 +1,15 @@
 #
-# Cookbook Name:: build-essential
-# Recipe:: default
+# Cookbook Name:: accounts
+# Recipe:: apps
 #
-# Copyright 2008-2009, Opscode, Inc.
+# Copyright 2009, Alexander van Zoest
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #     http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,27 +17,13 @@
 # limitations under the License.
 #
 
-case node[:platform]
-when "ubuntu","debian"
-  %w{build-essential binutils-doc}.each do |pkg|
-    package pkg do
-      action :install
-    end
-  end
-when "centos"
-  package "gcc" do
-    action :install
-  end
-end
+# Here you can put account definitions for each account you want installed when someone includes
+# include_recipe "accounts::apps"
 
-package "autoconf" do
-  action :install
-end
-
-package "flex" do
-  action :install
-end
-
-package "bison" do
-  action :install
-end
+#account "app1" do
+#  uid "500"
+#  account_type "role"
+#  comment "Application Role Account #1"
+#  ssh true
+#  sudo false
+#end

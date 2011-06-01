@@ -1,15 +1,15 @@
 #
-# Cookbook Name:: build-essential
+# Cookbook Name:: accounts
 # Recipe:: default
 #
-# Copyright 2008-2009, Opscode, Inc.
+# Copyright 2009, Alexander van Zoest
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #     http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,27 +17,19 @@
 # limitations under the License.
 #
 
-case node[:platform]
-when "ubuntu","debian"
-  %w{build-essential binutils-doc}.each do |pkg|
-    package pkg do
-      action :install
-    end
-  end
-when "centos"
-  package "gcc" do
-    action :install
-  end
+# Default depenendencies that need to be installed for accounts to function.
+
+package "sudo" do
+  action :upgrade
 end
 
-package "autoconf" do
-  action :install
-end
-
-package "flex" do
-  action :install
-end
-
-package "bison" do
-  action :install
+template "/etc/sudoers" do
+  source "sudoers.erb"
+  mode 0440
+  owner "root"
+  group "root"
+  variables(
+    :sudoers_groups => node[:accounts][:sudo][:groups], 
+    :sudoers_users => node[:accounts][:sudo][:users]
+  )
 end
