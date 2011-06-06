@@ -4,6 +4,5 @@
   "json_class": "Chef::Role",
   "description": "Install main packages",
   "run_list": [
-    "recipe[build-essential]"
   ]
 }
