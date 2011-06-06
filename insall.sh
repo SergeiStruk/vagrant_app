@@ -10,4 +10,4 @@ sudo ruby setup.rb
 sudo gem install chef
 cd /tmp/ 
 git clone git://github.com/SergeiStruk/vagrant_app1.git  
-sudo chef-solo -c /tmp/vagrant_app1/solo.rb -j /tmp/vagrant_app1/node.json
+chef-solo -c /tmp/vagrant_app1/solo.rb -j /tmp/vagrant_app1/node.json
