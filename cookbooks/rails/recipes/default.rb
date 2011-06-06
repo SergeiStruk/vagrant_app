@@ -23,7 +23,7 @@ capistrano = 'sudo gem install capistrano'
 god = 'sudo gem install god'
 result = ' '
 
-if (%x(rails -v).include? 'Rails 3.0.7') == false
+if (%x(gem list |grep capistrano).include? 'rails (3.0.7') == false
   (result == ' ') ? (result += rails) : (result += " && " + rails)
 end
 
