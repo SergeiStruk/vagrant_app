@@ -4,4 +4,4 @@ sudo apt-get install build-essential bison openssl libreadline5 libreadline5-dev
 sudo gem install chef
 cd /tmp/ 
 git clone git://github.com/SergeiStruk/vagrant_app1.git  
-chef-solo -c /tmp/vagrant_app1/solo.rb -j /tmp/vagrant_app1/node.json
+sudo chef-solo -c /tmp/vagrant_app1/solo.rb -j /tmp/vagrant_app1/node.json
