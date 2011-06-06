@@ -23,7 +23,7 @@ capistrano = 'sudo gem install capistrano'
 god = 'sudo gem install god'
 result = ' '
 
-if (system('rails -v')==true)
+if (system('rails -v')!=true)
   (result == ' ') ? (result += rails) : (result += " && " + rails)
 end
 

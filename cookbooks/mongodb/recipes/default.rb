@@ -27,7 +27,7 @@
 mongodb = 'sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 && sudo touch /etc/apt/sources.list.d/10gen.list && sudo chmod 777 /etc/apt/sources.list.d/10gen.list  && sudo echo "deb http://downloads.mongodb.org/distros/ubuntu 10.4 10gen" >> /etc/apt/sources.list.d/10gen.list && sudo apt-get update && sudo apt-get -y install mongodb-stable -y'
 
 result = ' '
-if (system('mongo --version')==true)
+if (system('mongo --version')!=true)
   (result == ' ') ? (result += mongodb) : (result += " && " + mongodb)
 end
 
