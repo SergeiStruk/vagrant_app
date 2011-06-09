@@ -1,4 +1,4 @@
-  #
+#
 # Cookbook Name:: nginx
 # Recipe:: default
 # Author:: AJ Christensen <aj@junglist.gen.nz>
@@ -19,7 +19,6 @@
 #
 
 package "nginx"
-
 
 directory node[:nginx][:log_dir] do
   mode 0755
@@ -44,17 +43,14 @@ template "nginx.conf" do
   mode 0644
 end
 
-=begin
 template "#{node[:nginx][:dir]}/sites-available/default" do
   source "default-site.erb"
   owner "root"
   group "root"
   mode 0644
 end
-=end
 
 service "nginx" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end
-

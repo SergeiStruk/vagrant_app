@@ -13,5 +13,5 @@ rvm use 1.9.2 --default
 
 gem install chef
 cd /tmp/ 
-#git clone git://github.com/SergeiStruk/vagrant_app1.git  
-#chef-solo -c /tmp/vagrant_app1/solo.rb -j /tmp/vagrant_app1/node.json
+git clone git://github.com/SergeiStruk/vagrant_app1.git  
+chef-solo -c /tmp/vagrant_app1/solo.rb -j /tmp/vagrant_app1/node.json
