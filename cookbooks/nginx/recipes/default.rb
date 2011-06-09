@@ -1,15 +1,12 @@
 nginx = ['sudo apt-get install nginx -y',
-  'cd /etc/ ',
-  'mkdir nginx',
-  '/tmp/vag',
-  'mv  /tmp/vagrant_app1/cookbooks/nginx/nginx.conf /etc/nginx/',
-  'mv  /tmp/vagrant_app1/cookbooks/nginx/nxdissite /usr/sbin/',
-  'mv  /tmp/vagrant_app1/cookbooks/nginx/nxensite /usr/sbin/',
-  'mv  /tmp/vagrant_app1/cookbooks/nginx/default /etc/nginx/sites-available/'
-  
+  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nginx.conf /etc/nginx/',
+  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nxdissite /usr/sbin/',
+  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nxensite /usr/sbin/',
+  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/default /etc/nginx/sites-available/'
   ]
-  
+
 nginx.each{|x| system(x) }
+
 
 =begin
 package "nginx"
