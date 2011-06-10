@@ -17,10 +17,10 @@
 # limitations under the License.
 #
 
-rails = 'gem install rails'
-unicorn = 'gem install unicorn'
-capistrano = 'gem install capistrano'
-god = 'gem install god'
+rails = 'sudo gem install rails'
+unicorn = 'sudo gem install unicorn'
+capistrano = 'sudo gem install capistrano'
+god = 'sudo gem install god'
 result = ' '
 
 if (system('rails -v')!=true)
