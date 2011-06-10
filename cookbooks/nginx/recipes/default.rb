@@ -1,18 +1,4 @@
-=begin
-nginx = ['sudo apt-get install nginx -y',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nginx.conf /etc/nginx/',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nxdissite /usr/sbin/',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nxensite /usr/sbin/',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/default /etc/nginx/sites-available/'
-  ]
-
-nginx.each{|x| system(x) }
-=end
-
-
 package "nginx"
-#nginx='sudo apt-get install nginx -y'
-#system(nginx)
 
 directory node[:nginx][:log_dir] do
   mode 0755
