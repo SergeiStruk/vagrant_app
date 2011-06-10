@@ -1,18 +1,17 @@
-=begin
-nginx = ['sudo apt-get install nginx -y',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nginx.conf /etc/nginx/',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nxdissite /usr/sbin/',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/nxensite /usr/sbin/',
-  'sudo mv  /tmp/vagrant_app1/cookbooks/nginx/default /etc/nginx/sites-available/'
-  ]
+nginx_filename = ["nginx", node[:nginx][:version], node[:nginx][:architecture]].join("_")+".deb"
 
-nginx.each{|x| system(x) }
-=end
+package "libperl5.10"
+package "libgd2-noxpm"
+package "libxslt1.1"
+package "libgeoip1"
 
+dpkg_package "nginx" do
+  source "/home/system/pkg/debs/#{nginx_filename}"
+end
 
-package "nginx"
-#nginx='sudo apt-get install nginx -y'
-#system(nginx)
+service "nginx" do
+  supports :status => true, :restart => true, :reload => true
+end
 
 directory node[:nginx][:log_dir] do
   mode 0755
@@ -29,23 +28,37 @@ end
   end
 end
 
+cookbook_file "#{node[:nginx][:dir]}/mime.types"
+
 template "nginx.conf" do
   path "#{node[:nginx][:dir]}/nginx.conf"
   source "nginx.conf.erb"
   owner "root"
   group "root"
   mode 0644
+  notifies :reload, resources(:service => "nginx")
 end
-=begin
-template "#{node[:nginx][:dir]}/sites-available/default" do
-  source "default-site.erb"
-  owner "root"
-  group "root"
-  mode 0644
+
+directory "/etc/nginx/helpers"
+
+# helpers to be included in your vhosts
+node[:nginx][:helpers].each do |h|
+  template "/etc/nginx/helpers/#{h}.conf" do
+    notifies :reload, resources(:service => "nginx")
+  end
 end
-=end
+
+# server-wide defaults, automatically loaded
+node[:nginx][:extras].each do |ex|
+  template "/etc/nginx/conf.d/#{ex}.conf" do
+    notifies :reload, resources(:service => "nginx")
+  end
+end  
+
 service "nginx" do
-  supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end
 
+nginx_site "default" do
+  enable false
+end

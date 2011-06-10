@@ -1,12 +1,13 @@
-
 types {
     text/html                             html htm shtml;
     text/css                              css;
-    text/xml                              xml rss;
+    text/xml                              xml;
     image/gif                             gif;
     image/jpeg                            jpeg jpg;
     application/x-javascript              js;
+    application/json                      json;
     application/atom+xml                  atom;
+    application/rss+xml                   rss;
 
     text/mathml                           mml;
     text/plain                            txt;
@@ -20,6 +21,7 @@ types {
     image/x-icon                          ico;
     image/x-jng                           jng;
     image/x-ms-bmp                        bmp;
+    image/svg+xml                         svg;
 
     application/java-archive              jar war ear;
     application/mac-binhex40              hqx;
@@ -31,6 +33,8 @@ types {
     application/vnd.ms-powerpoint         ppt;
     application/vnd.wap.wmlc              wmlc;
     application/vnd.wap.xhtml+xml         xhtml;
+    application/vnd.google-earth.kml+xml  kml;
+    application/vnd.google-earth.kmz      kmz;
     application/x-cocoa                   cco;
     application/x-java-archive-diff       jardiff;
     application/x-java-jnlp-file          jnlp;
@@ -46,7 +50,6 @@ types {
     application/x-x509-ca-cert            der pem crt;
     application/x-xpinstall               xpi;
     application/zip                       zip;
-    application/vnd.mindjet.mindmanager   mmp mmap mmpt mmat mmmp mmas;
 
     application/octet-stream              bin exe dll;
     application/octet-stream              deb;
