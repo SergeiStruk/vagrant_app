@@ -1,40 +1,60 @@
-user <%= node[:nginx][:user] %>;
-worker_processes  <%= node[:nginx][:worker_processes] %>;
-<% if node[:nginx][:daemon_disable] -%>
-daemon off;
-<% end -%>
+user  vagrant;
+worker_processes  1;
 
-error_log  <%= node[:nginx][:log_dir] %>/error.log;
-pid        /var/run/nginx.pid;
+error_log  /tmp/error.log;
+
+pid        /tmp/nginx.pid;
 
 events {
-  worker_connections  <%= node[:nginx][:worker_connections] %>;
+        worker_connections  1024;
+
 }
 
 http {
-  include       <%= node[:nginx][:dir] %>/mime.types;
-  default_type  application/octet-stream;
+        include       mime.types;
+        default_type  application/octet-stream;
 
-  access_log	<%= node[:nginx][:log_dir] %>/access.log;
+        sendfile        on;
+#tcp_nopush     on;
 
-  sendfile on;
-  tcp_nopush on;
-  tcp_nodelay on;
+#keepalive_timeout  0;
+        keepalive_timeout  65;
 
-  <% if node[:nginx][:keepalive] == "on" %>
-  keepalive_timeout  <%= node[:nginx][:keepalive_timeout] %>;
-  <% end %>
+#gzip  on;
 
-  gzip  <%= node[:nginx][:gzip] %>;
-  <% if node[:nginx][:gzip] == "on" %>
-  gzip_http_version <%= node[:nginx][:gzip_http_version] %>;
-  gzip_comp_level <%= node[:nginx][:gzip_comp_level] %>;
-  gzip_proxied <%= node[:nginx][:gzip_proxied] %>;
-  gzip_types <%= node[:nginx][:gzip_types].join(' ') %>;
-  <% end %>
+        upstream unicorn_server {
+# This is the socket we configured in unicorn.rb
+                server unix:<%= node[:nginx][:app_dir] %>/current/tmp/unicorn.sock;
+        }
 
-  server_names_hash_bucket_size <%= node[:nginx][:server_names_hash_bucket_size] %>;
+        server {
+                listen       80;
+                server_name  localhost;
 
-  include <%= node[:nginx][:dir] %>/conf.d/*.conf;
-  include <%= node[:nginx][:dir] %>/sites-enabled/*;
+                #access_log  <%= node[:nginx][:app_dir] %>/current/log/nginx.access.log  main;
+
+                root   <%= node[:nginx][:app_dir] %>/current/public;
+                try_files $uri/index.html $uri.html @app;
+                location @app {
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        proxy_set_header Host $http_host;
+                        proxy_redirect off;
+
+# If you don't find the filename in the static files
+# Then request it from the unicorn server
+                        if (!-f $request_filename) {
+                                proxy_pass http://unicorn_server;
+                                break;
+                        }
+                }
+
+#error_page  404              /404.html;
+# redirect server error pages to the static page /50x.html
+#
+#             error_page   500 502 503 504  /50x.html;
+                location = /50x.html {
+                        root   html;
+                }
+        }
 }
+
