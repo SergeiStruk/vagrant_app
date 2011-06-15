@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-rails = 'gem install rails'
-god = 'gem install god'
+rails = 'gem install rails --no-ri --no-rdoc'
+god = 'gem install god --no-ri --no-rdoc'
 result = ' '
 
 if (system('rails -v')!=true)
