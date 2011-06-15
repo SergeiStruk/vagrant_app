@@ -25,7 +25,7 @@
 #exec 'sudo apt-get install git-core -y && sudo apt-get install curl -y  && sudo apt-get update -y && cd ruby-src && wget ftp://ftp.ruby-lang.org//pub/ruby/1.9/ruby-1.9.2-p180.tar.gz  && tar -zxvf ruby-1.9.2-p180.tar.gz  && cd ruby-1.9.2-p180 && ./configure && sudo apt-get install make -y && make && sudo make install &&  sudo gem install rails '
 
 mongodb = 'sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 && sudo touch /etc/apt/sources.list.d/10gen.list && sudo chmod 777 /etc/apt/sources.list.d/10gen.list  && sudo echo "deb http://downloads.mongodb.org/distros/ubuntu 10.4 10gen" >> /etc/apt/sources.list.d/10gen.list && sudo apt-get update && sudo apt-get -y install mongodb-stable -y'
-
+mongodb = 'echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" >> /etc/apt/sources.list && sudo apt-get update && sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 && sudo apt-get install mongodb-10gen -y'
 result = ' '
 if (system('mongo --version')!=true)
   (result == ' ') ? (result += mongodb) : (result += " && " + mongodb)
