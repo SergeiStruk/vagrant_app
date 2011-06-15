@@ -17,20 +17,17 @@
 # limitations under the License.
 #
 
-rails = 'gem install rails --no-ri --no-rdoc'
-god = 'gem install god --no-ri --no-rdoc'
+rails = 'sudo gem install rails --no-ri --no-rdoc'
+god = 'sudo gem install god --no-ri --no-rdoc'
+god = 'sudo gem install unicorn --no-ri --no-rdoc'
 result = ' '
 
 if (system('rails -v')!=true)
   (result == ' ') ? (result += rails) : (result += " && " + rails)
 end
 
-if (%x(gem list |grep capistrano).include? 'capistrano') == false
-  (result == ' ') ? (result += capistrano) : (result += " && " + capistrano)
-end
-
-if (%x(gem list |grep unicorn).include? 'unicorn') == false
-  (result == ' ') ? (result += unicorn) : (result += " && " + unicorn)
+if (%x(gem list |grep unicorn).include? 'god') == false
+  (result == ' ') ? (result += god) : (result += " && " + god)
 end
 
 if (%x(gem list |grep god).include? 'god') == false
