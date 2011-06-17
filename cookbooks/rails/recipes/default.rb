@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-rails = 'gem install rails --no-ri --no-rdoc'
-god = 'gem install god --no-ri --no-rdoc'
-god = 'gem install unicorn --no-ri --no-rdoc'
+rails = 'sudo gem install rails --no-ri --no-rdoc'
+god = 'sudo gem install god --no-ri --no-rdoc'
+god = 'sudo gem install unicorn --no-ri --no-rdoc'
 result = ' '
 
 if (system('rails -v')!=true)
