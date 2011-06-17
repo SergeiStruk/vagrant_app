@@ -18,8 +18,8 @@
 # limitations under the License.
 #
 
-#package "nginx"
-system("sudo apt-get install nginx -y")
+package "nginx"
+#system("sudo apt-get install nginx -y")
 
 
 directory node[:nginx][:log_dir] do
