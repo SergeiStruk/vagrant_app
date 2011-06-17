@@ -1,9 +1,9 @@
 God.watch do |w|
   w.name = 'mongodb'
   w.interval = 30.seconds # default
-  w.start = "sudo start mongodb"
-  w.stop = "sudo stop mongodb"
-  w.restart = "sudo restart mongodb"
+  w.start = "sudo mongod"
+  w.stop = "sudo killall mongod"
+  w.restart = "sudo killall mongod && sudo mongod"
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
 # w.pid_file = '/var/run/mysqld/mysqld.pid'

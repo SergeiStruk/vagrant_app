@@ -4,9 +4,8 @@ rails_root = ENV['RAILS_ROOT'] || "/var/www/testing/current"
 God.watch do |w|
   w.name = "unicorn"
   w.interval = 30.seconds # default
-
   # unicorn needs to be run from the rails root
-  w.start = "cd #{rails_root} && bundle exec /usr/local/bin/unicorn_rails -c #{rails_root}/config/unicorn.rb"
+  w.start = "cd #{rails_root} && RAILS_ENV=production bundle exec /usr/local/bin/unicorn_rails -c #{rails_root}/config/unicorn.rb"
 
   # QUIT gracefully shuts down workers
   w.stop = "ps ax|grep -i unicorn |awk '{print $1}'|xargs kill -9"
