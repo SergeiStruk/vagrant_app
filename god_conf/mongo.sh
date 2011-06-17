@@ -1,0 +1,1 @@
+sudo god -c /etc/init.d/mongo.god
