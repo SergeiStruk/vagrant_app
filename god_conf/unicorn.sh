@@ -1,1 +1,1 @@
-sudo god -c /etc/init.d/unicorn.god
+sudo god load /etc/init.d/unicorn.god

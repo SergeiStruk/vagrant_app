@@ -1,1 +1,1 @@
-sudo god -c /etc/init.d/mongo.god
+sudo god load /etc/init.d/mongo.god
