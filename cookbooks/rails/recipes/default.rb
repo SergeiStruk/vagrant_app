@@ -19,15 +19,15 @@
 
 rails = 'sudo gem install rails --no-ri --no-rdoc'
 god = 'sudo gem install god --no-ri --no-rdoc'
-god = 'sudo gem install unicorn --no-ri --no-rdoc'
+unicorn = 'sudo gem install unicorn --no-ri --no-rdoc'
 result = ' '
 
 if (system('rails -v')!=true)
   (result == ' ') ? (result += rails) : (result += " && " + rails)
 end
 
-if (%x(gem list |grep unicorn).include? 'god') == false
-  (result == ' ') ? (result += god) : (result += " && " + god)
+if (%x(gem list |grep unicorn).include? 'unicorn') == false
+  (result == ' ') ? (result += unicorn) : (result += " && " + god)
 end
 
 if (%x(gem list |grep god).include? 'god') == false
