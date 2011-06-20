@@ -18,7 +18,7 @@
 #
 
 rails = 'sudo gem install rails --no-ri --no-rdoc'
-god = 'sudo gem install god --no-ri --no-rdoc'
+god = 'sudo gem install god --no-ri --no-rdoc && sudo apt-get install god -y'
 unicorn = 'sudo gem install unicorn --no-ri --no-rdoc'
 result = ' '
 
